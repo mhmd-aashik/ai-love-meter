@@ -20,7 +20,7 @@ import ResultStep from "./love/steps/ResultStep";
 const initialPerson: PersonDetails = {
   name: "",
   age: 0,
-  favoriteNumber: 7,
+  favoriteNumber: 0,
   hobby: "",
 };
 
