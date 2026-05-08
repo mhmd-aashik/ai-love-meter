@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: love_meter_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: love_meter_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - love_meter_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  love_meter_postgres_data:
