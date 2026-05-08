@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ❤️ AI Love Meter - GraphQL Powered
 
-## Getting Started
+AI Love Meter is a modern web application that uses Artificial Intelligence to analyze the compatibility between two people based on their names, birth dates, favorite numbers, and more. Built with **Next.js**, **Drizzle ORM**, **PostgreSQL**, and powered by **Google Gemini AI**.
 
-First, run the development server:
+## ✨ Features
+
+- **AI-Powered Analysis**: Uses Gemini 2.5 Flash to generate deep (and fun) compatibility insights.
+- **GraphQL API**: Modern GraphQL endpoint for querying and triggering analyses.
+- **REST API**: Robust RESTful routes for legacy integrations.
+- **Detailed Metrics**: Scores name compatibility, zodiac vibes, color synchronization, and number energy.
+- **Funny Insights**: Generates "funny lines" and "warnings" for each result.
+- **History Tracking**: Keeps track of recent analysis results.
+
+## 🚀 Tech Stack
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Database**: [PostgreSQL](https://www.postgresql.org/) with [Drizzle ORM](https://orm.drizzle.team/)
+- **AI Engine**: [Google Gemini AI](https://ai.google.dev/)
+- **API**: [GraphQL Yoga](https://the-guild.dev/graphql/yoga) & [Next.js Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- **Validation**: [Zod](https://zod.dev/)
+
+## 🛠️ Getting Started
+
+### 1. Prerequisites
+
+- Node.js 18+
+- Docker (for PostgreSQL)
+
+### 2. Environment Setup
+
+Create a `.env.local` file in the root directory:
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/love_meter"
+GEMINI_API_KEY="your_google_gemini_api_key"
+GEMINI_MODEL="gemini-2.5-flash"
+```
+
+### 3. Database Setup
+
+Spin up the database using Docker:
+
+```bash
+docker-compose up -d
+```
+
+Run migrations:
+
+```bash
+npx drizzle-kit push
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📡 API Documentation
 
-## Learn More
+### 🟢 GraphQL API
 
-To learn more about Next.js, take a look at the following resources:
+The GraphQL endpoint is available at `/api/graphql`. It includes a built-in GraphiQL interface for testing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### **Queries**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Get a specific result:**
+```graphql
+query GetResult($id: ID!) {
+  getLoveResult(id: $id) {
+    id
+    score
+    status
+    summary
+    funnyLine
+    createdAt
+  }
+}
+```
 
-## Deploy on Vercel
+**Get recent results:**
+```graphql
+query {
+  getRecentResults(limit: 5) {
+    id
+    personAName
+    personBName
+    score
+  }
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### **Mutations**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Analyze Compatibility:**
+```graphql
+mutation {
+  analyzeLove(
+    personA: {
+      name: "Romeo",
+      dateOfBirth: "1995-01-01",
+      favoriteNumber: 7,
+      favoriteColor: "Red",
+      zodiacSign: "Leo"
+    },
+    personB: {
+      name: "Juliet",
+      dateOfBirth: "1997-02-14",
+      favoriteNumber: 13,
+      favoriteColor: "Blue",
+      zodiacSign: "Pisces"
+    },
+    relationshipType: "Romantic",
+    extraContext: "Met at a party."
+  ) {
+    id
+    score
+    status
+    summary
+    strengths
+    warnings
+  }
+}
+```
+
+### 🔵 REST API
+
+#### **POST `/api/love/analyze`**
+Analyzes compatibility and saves the result.
+
+**Request Body:**
+```json
+{
+  "personA": { ... },
+  "personB": { ... },
+  "relationshipType": "Friends",
+  "extraContext": "..."
+}
+```
+
+#### **GET `/api/love/results`**
+Fetches recent analysis results.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+Created with ❤️ by Antigravity AI
