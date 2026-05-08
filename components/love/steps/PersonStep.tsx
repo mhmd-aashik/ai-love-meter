@@ -86,7 +86,7 @@ export default function PersonStep({
             Major Hobby
           </Label>
           <div className="relative">
-            <Heart className="absolute left-5 top-1/2 -translate-y-1/2 text-primary/40 w-5 h-5 transition-colors group-focus-within:text-primary" />
+            <Heart className="absolute left-5 top-1/2 -translate-y-1/2 text-red-500 fill-red-500 w-5 h-5 transition-all group-focus-within:scale-110 group-focus-within:drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]" />
             <Input
               placeholder="e.g. Photography, Gaming"
               value={person.hobby}

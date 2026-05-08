@@ -5,14 +5,18 @@ type WelcomeStepProps = {
   recentResults?: { id: string; score: number }[];
 };
 
-export default function WelcomeStep({ onStart, recentResults }: WelcomeStepProps) {
+export default function WelcomeStep({
+  onStart,
+  recentResults,
+}: WelcomeStepProps) {
   return (
     <div className="text-center space-y-8 py-12">
-      <div className="inline-flex p-4 bg-accent/10 rounded-3xl mb-4">
-        <Heart className="w-12 h-12 text-accent fill-accent" />
+      <div className="inline-flex p-4 bg-red-500/10 rounded-3xl mb-4 relative">
+        <div className="absolute inset-0 bg-red-500/20 blur-2xl animate-pulse rounded-full" />
+        <Heart className="relative w-12 h-12 text-red-500 fill-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]" />
       </div>
       <h1 className="text-5xl font-black text-white tracking-tighter">
-        COSMIC <span className="text-accent">MATCH</span>
+        AI <span className="text-red-500">MATCH</span>
       </h1>
       <p className="text-zinc-400 text-lg max-w-sm mx-auto">
         Ready to find your celestial alignment? Step into the cosmic analyzer.
@@ -30,14 +34,16 @@ export default function WelcomeStep({ onStart, recentResults }: WelcomeStepProps
           Recent Discoveries
         </p>
         <div className="flex justify-center gap-2">
-          {recentResults?.slice(0, 3).map((r: { id: string; score: number }) => (
-            <div
-              key={r.id}
-              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold"
-            >
-              {r.score}%
-            </div>
-          ))}
+          {recentResults
+            ?.slice(0, 3)
+            .map((r: { id: string; score: number }) => (
+              <div
+                key={r.id}
+                className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold"
+              >
+                {r.score}%
+              </div>
+            ))}
         </div>
       </div>
     </div>

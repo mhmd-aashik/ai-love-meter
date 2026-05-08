@@ -22,18 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn(
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(
+        "bg-background text-foreground font-sans min-h-full relative overflow-x-hidden",
         "dark",
-        "min-h-full",
         outfit.variable,
-        "font-sans",
-        geist.variable,
-      )}
-    >
-      <body className="bg-background text-foreground font-sans min-h-full relative overflow-x-hidden">
+        geist.variable
+      )}>
         {/* Animated Background Elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
           <div className="glow-orb w-[500px] h-[500px] bg-accent/20 -top-48 -left-48" />
