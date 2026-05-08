@@ -40,5 +40,5 @@ export const GET_RECENT_RESULTS_QUERY = gql`
   }
 `;
 
-export const graphqlRequest = (document: string, variables?: any) =>
+export const graphqlRequest = (document: string, variables?: Record<string, unknown>) =>
   request(GRAPHQL_ENDPOINT, document, variables);

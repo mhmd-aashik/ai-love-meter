@@ -3,6 +3,7 @@ import { generateLoveAnalysis } from "@/lib/ai";
 import { db } from "@/database";
 import { loveResults } from "@/database/love_results";
 import { eq, desc } from "drizzle-orm";
+import { AnalyzeLovePayload } from "@/types/love";
 
 const typeDefs = `
   type LoveResult {
@@ -71,14 +72,14 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    getLoveResult: async (_: any, { id }: { id: string }) => {
+    getLoveResult: async (_: unknown, { id }: { id: string }) => {
       const results = await db
         .select()
         .from(loveResults)
         .where(eq(loveResults.id, id));
       return results[0];
     },
-    getRecentResults: async (_: any, { limit = 10 }: { limit: number }) => {
+    getRecentResults: async (_: unknown, { limit = 10 }: { limit: number }) => {
       const results = await db
         .select()
         .from(loveResults)
@@ -91,7 +92,7 @@ const resolvers = {
     },
   },
   Mutation: {
-    analyzeLove: async (_: any, args: any) => {
+    analyzeLove: async (_: unknown, args: AnalyzeLovePayload) => {
       const { personA, personB, relationshipType, extraContext } = args;
 
       const aiResult = await generateLoveAnalysis({
