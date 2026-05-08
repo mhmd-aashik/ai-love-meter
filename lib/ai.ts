@@ -37,26 +37,20 @@ function buildLovePrompt(input: AnalyzeLovePayload): string {
   return `
 You are an entertaining AI Love Meter.
 
-Analyze compatibility between two people using their details.
+Analyze compatibility between two people using their limited details.
 This is only for fun and entertainment.
 
 Person A:
 - Name: ${input.personA.name}
-- Date of Birth: ${input.personA.dateOfBirth}
+- Age: ${input.personA.age}
 - Favorite Number: ${input.personA.favoriteNumber}
-- Favorite Color: ${input.personA.favoriteColor || "Not provided"}
-- Zodiac Sign: ${input.personA.zodiacSign || "Not provided"}
-- Hobby: ${input.personA.hobby || "Not provided"}
-- Personality: ${input.personA.personality || "Not provided"}
+- Hobby: ${input.personA.hobby}
 
 Person B:
 - Name: ${input.personB.name}
-- Date of Birth: ${input.personB.dateOfBirth}
+- Age: ${input.personB.age}
 - Favorite Number: ${input.personB.favoriteNumber}
-- Favorite Color: ${input.personB.favoriteColor || "Not provided"}
-- Zodiac Sign: ${input.personB.zodiacSign || "Not provided"}
-- Hobby: ${input.personB.hobby || "Not provided"}
-- Personality: ${input.personB.personality || "Not provided"}
+- Hobby: ${input.personB.hobby}
 
 Relationship Type: ${input.relationshipType}
 Extra Context: ${input.extraContext || "Not provided"}
@@ -65,16 +59,15 @@ Return only valid JSON.
 No markdown.
 No explanation outside JSON.
 
-Required JSON:
+Required JSON Structure:
 {
   "score": 85,
   "status": "Strong Match",
   "summary": "Short romantic but fun explanation",
   "nameCompatibility": "Fun explanation based on names",
-  "birthCompatibility": "Fun explanation based on birth dates",
+  "ageCompatibility": "Fun explanation based on ages",
   "numberVibe": "Fun explanation based on favorite numbers",
-  "colorVibe": "Fun explanation based on favorite colors",
-  "zodiacVibe": "Fun zodiac-style compatibility explanation",
+  "hobbyVibe": "Fun explanation based on hobbies",
   "strengths": ["point 1", "point 2", "point 3"],
   "warnings": ["point 1", "point 2"],
   "funnyLine": "One funny viral-style line",
@@ -86,7 +79,6 @@ Rules:
 - status must be one of: "Low Match", "Possible Match", "Good Match", "Strong Match", "Soulmate Energy"
 - keep tone fun, romantic, positive, and shareable
 - do not claim scientific accuracy
-- do not make serious relationship decisions
 `;
 }
 

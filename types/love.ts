@@ -1,11 +1,8 @@
 export type PersonDetails = {
   name: string;
-  dateOfBirth: string;
+  age: number;
   favoriteNumber: number;
-  favoriteColor?: string;
-  zodiacSign?: string;
-  hobby?: string;
-  personality?: string;
+  hobby: string;
 };
 
 export type AnalyzeLovePayload = {
@@ -20,10 +17,9 @@ export type LoveAiResult = {
   status: string;
   summary: string;
   nameCompatibility: string;
-  birthCompatibility: string;
+  ageCompatibility: string;
   numberVibe: string;
-  colorVibe: string;
-  zodiacVibe: string;
+  hobbyVibe: string;
   strengths: string[];
   warnings: string[];
   funnyLine: string;

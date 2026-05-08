@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Outfit, Geist } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/providers";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -19,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} dark h-full overflow-hidden`}>
+    <html lang="en" className={cn("dark", "h-full", "overflow-hidden", outfit.variable, "font-sans", geist.variable)}>
       <body className="bg-background text-foreground font-sans h-full relative overflow-hidden">
         {/* Animated Background Elements */}
         <div className="glow-orb w-[500px] h-[500px] bg-accent/20 -top-48 -left-48" />

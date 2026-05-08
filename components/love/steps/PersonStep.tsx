@@ -1,8 +1,10 @@
 "use client";
 
-import { User, Calendar, Hash, Moon, ArrowRight, ArrowLeft } from "lucide-react";
+import { User, Hash, Heart, ArrowRight, ArrowLeft } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import Header from "../Header";
-import InputGroup from "../InputGroup";
 import { PersonDetails } from "@/types/love";
 
 type PersonStepProps = {
@@ -29,74 +31,80 @@ export default function PersonStep({
   return (
     <div className="space-y-8">
       <Header step={step} total={total} title={title} subtitle={subtitle} />
+      
       <div className="space-y-6">
-        <InputGroup
-          label="Name"
-          icon={<User className="w-4 h-4" />}
-          value={person.name}
-        >
-          <input
-            placeholder={person.name ? "" : "Enter name..."}
-            value={person.name}
-            onChange={(e) => setPerson({ ...person, name: e.target.value })}
-            className="bg-transparent w-full text-white outline-none"
-          />
-        </InputGroup>
-        <InputGroup
-          label="Birthday"
-          icon={<Calendar className="w-4 h-4" />}
-          value={person.dateOfBirth}
-        >
-          <input
-            type="date"
-            value={person.dateOfBirth}
-            onChange={(e) => setPerson({ ...person, dateOfBirth: e.target.value })}
-            className="bg-transparent w-full text-white outline-none [color-scheme:dark]"
-          />
-        </InputGroup>
+        <div className="space-y-2">
+          <Label className="font-black uppercase tracking-widest text-muted-foreground text-[10px] ml-1">Full Name</Label>
+          <div className="relative">
+            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              placeholder="Enter name"
+              value={person.name}
+              onChange={(e) => setPerson({ ...person, name: e.target.value })}
+              className="h-14 pl-12 rounded-lg bg-white/5 border-white/10 focus:border-primary/50 transition-all"
+            />
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
-          <InputGroup
-            label="Fav #"
-            icon={<Hash className="w-4 h-4" />}
-            value={person.favoriteNumber}
-          >
-            <input
-              type="number"
-              value={person.favoriteNumber}
-              onChange={(e) =>
-                setPerson({ ...person, favoriteNumber: Number(e.target.value) })
-              }
-              className="bg-transparent w-full text-white outline-none"
+          <div className="space-y-2">
+            <Label className="font-black uppercase tracking-widest text-muted-foreground text-[10px] ml-1">Age</Label>
+            <div className="relative">
+              <Hash className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                type="number"
+                placeholder="Age"
+                value={person.age || ""}
+                onChange={(e) => setPerson({ ...person, age: Number(e.target.value) })}
+                className="h-14 pl-12 rounded-lg bg-white/5 border-white/10 focus:border-primary/50 transition-all"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Label className="font-black uppercase tracking-widest text-muted-foreground text-[10px] ml-1">Fav Number</Label>
+            <div className="relative">
+              <Hash className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+              <Input
+                type="number"
+                placeholder="0-99"
+                value={person.favoriteNumber || ""}
+                onChange={(e) => setPerson({ ...person, favoriteNumber: Number(e.target.value) })}
+                className="h-14 pl-12 rounded-lg bg-white/5 border-white/10 focus:border-primary/50 transition-all"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label className="font-black uppercase tracking-widest text-muted-foreground text-[10px] ml-1">Major Hobby</Label>
+          <div className="relative">
+            <Heart className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              placeholder="e.g. Photography, Gaming"
+              value={person.hobby}
+              onChange={(e) => setPerson({ ...person, hobby: e.target.value })}
+              className="h-14 pl-12 rounded-lg bg-white/5 border-white/10 focus:border-primary/50 transition-all"
             />
-          </InputGroup>
-          <InputGroup
-            label="Zodiac"
-            icon={<Moon className="w-4 h-4" />}
-            value={person.zodiacSign}
-          >
-            <input
-              placeholder={person.zodiacSign ? "" : "e.g. Leo"}
-              value={person.zodiacSign}
-              onChange={(e) => setPerson({ ...person, zodiacSign: e.target.value })}
-              className="bg-transparent w-full text-white outline-none"
-            />
-          </InputGroup>
+          </div>
         </div>
       </div>
+
       <div className="flex gap-4 pt-4">
-        <button
+        <Button
+          variant="secondary"
+          size="icon"
           onClick={onPrev}
-          className="p-6 rounded-2xl glass hover:bg-white/10 text-white transition-all"
+          className="h-14 w-14 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all"
         >
           <ArrowLeft className="w-6 h-6" />
-        </button>
-        <button
-          disabled={!person.name || !person.dateOfBirth}
+        </Button>
+        <Button
+          disabled={!person.name || !person.age}
           onClick={onNext}
-          className="flex-1 py-6 bg-white text-black rounded-2xl font-black text-xl disabled:opacity-30 transition-all flex items-center justify-center gap-2"
+          className="flex-1 h-14 rounded-xl font-bold text-xl bg-primary text-primary-foreground hover:bg-primary/90 transition-all shadow-lg"
         >
-          Continue <ArrowRight className="w-6 h-6" />
-        </button>
+          Next <ArrowRight className="w-6 h-6 ml-2" />
+        </Button>
       </div>
     </div>
   );

@@ -9,20 +9,14 @@ const typeDefs = `
   type LoveResult {
     id: ID!
     personAName: String!
-    personADateOfBirth: String!
+    personAAge: Int!
     personAFavoriteNumber: Int!
-    personAFavoriteColor: String
-    personAZodiacSign: String
-    personAHobby: String
-    personAPersonality: String
+    personAHobby: String!
     
     personBName: String!
-    personBDateOfBirth: String!
+    personBAge: Int!
     personBFavoriteNumber: Int!
-    personBFavoriteColor: String
-    personBZodiacSign: String
-    personBHobby: String
-    personBPersonality: String
+    personBHobby: String!
     
     relationshipType: String!
     extraContext: String
@@ -32,10 +26,9 @@ const typeDefs = `
     summary: String!
     
     nameCompatibility: String
-    birthCompatibility: String
+    ageCompatibility: String
     numberVibe: String
-    colorVibe: String
-    zodiacVibe: String
+    hobbyVibe: String
     
     strengths: [String!]!
     warnings: [String!]!
@@ -47,12 +40,9 @@ const typeDefs = `
 
   input PersonInput {
     name: String!
-    dateOfBirth: String!
+    age: Int!
     favoriteNumber: Int!
-    favoriteColor: String
-    zodiacSign: String
-    hobby: String
-    personality: String
+    hobby: String!
   }
 
   type Query {
@@ -106,20 +96,14 @@ const resolvers = {
         .insert(loveResults)
         .values({
           personAName: personA.name,
-          personADateOfBirth: personA.dateOfBirth,
+          personAAge: personA.age,
           personAFavoriteNumber: personA.favoriteNumber,
-          personAFavoriteColor: personA.favoriteColor,
-          personAZodiacSign: personA.zodiacSign,
           personAHobby: personA.hobby,
-          personAPersonality: personA.personality,
 
           personBName: personB.name,
-          personBDateOfBirth: personB.dateOfBirth,
+          personBAge: personB.age,
           personBFavoriteNumber: personB.favoriteNumber,
-          personBFavoriteColor: personB.favoriteColor,
-          personBZodiacSign: personB.zodiacSign,
           personBHobby: personB.hobby,
-          personBPersonality: personB.personality,
 
           relationshipType,
           extraContext,
@@ -128,10 +112,9 @@ const resolvers = {
           status: aiResult.status,
           summary: aiResult.summary,
           nameCompatibility: aiResult.nameCompatibility,
-          birthCompatibility: aiResult.birthCompatibility,
+          ageCompatibility: aiResult.ageCompatibility,
           numberVibe: aiResult.numberVibe,
-          colorVibe: aiResult.colorVibe,
-          zodiacVibe: aiResult.zodiacVibe,
+          hobbyVibe: aiResult.hobbyVibe,
           strengths: aiResult.strengths,
           warnings: aiResult.warnings,
           funnyLine: aiResult.funnyLine,
