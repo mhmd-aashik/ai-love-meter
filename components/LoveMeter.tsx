@@ -174,7 +174,7 @@ export default function LoveMeter() {
               key="result"
               variants={variants}
               direction={direction}
-              className="max-w-xl"
+              className="max-w-6xl"
             >
               <ResultStep
                 results={mutation.data.analyzeLove}

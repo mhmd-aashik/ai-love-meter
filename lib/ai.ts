@@ -61,8 +61,8 @@ No explanation outside JSON.
 
 Required JSON Structure:
 {
-  "score": 85,
-  "status": "Strong Match",
+  "score": "A number between 0 and 100",
+  "status": "One of the required match statuses",
   "summary": "Short romantic but fun explanation",
   "nameCompatibility": "Fun explanation based on names",
   "ageCompatibility": "Fun explanation based on ages",
@@ -75,7 +75,9 @@ Required JSON Structure:
 }
 
 Rules:
-- score must be between 0 and 100
+- CALCULATE a unique score based on the mathematical and vibrational alignment of the provided details.
+- score must be an INTEGER between 0 and 100.
+- NEVER use a default score; analyze the input names, ages, and hobbies carefully.
 - status must be one of: "Low Match", "Possible Match", "Good Match", "Strong Match", "Soulmate Energy"
 - keep tone fun, romantic, positive, and shareable
 - do not claim scientific accuracy
