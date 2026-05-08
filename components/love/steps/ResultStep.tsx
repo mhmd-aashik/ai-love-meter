@@ -87,7 +87,10 @@ export default function ResultStep({ results, onReset }: ResultStepProps) {
         >
           <RefreshCcw className="w-6 h-6 opacity-70" /> Try Again
         </button>
-        <button className="flex-1 py-6 rounded-2xl bg-white text-black font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all flex items-center justify-center gap-3 shadow-2xl">
+        <button 
+          onClick={onReset}
+          className="flex-1 py-6 rounded-2xl bg-white text-black font-black uppercase tracking-[0.2em] hover:scale-[1.02] transition-all flex items-center justify-center gap-3 shadow-2xl"
+        >
           <Check className="w-7 h-7" /> Finish
         </button>
       </div>
