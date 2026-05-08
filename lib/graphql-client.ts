@@ -1,6 +1,9 @@
 import { request, gql } from "graphql-request";
 
-const GRAPHQL_ENDPOINT = "/api/graphql";
+const GRAPHQL_ENDPOINT = 
+  typeof window !== "undefined" 
+    ? `${window.location.origin}/api/graphql` 
+    : "http://localhost:3000/api/graphql"; // Fallback for SSR
 
 export const ANALYZE_LOVE_MUTATION = gql`
   mutation AnalyzeLove(
