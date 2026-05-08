@@ -97,7 +97,7 @@ body {
 }
 
 .glow-orb {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: blur(100px);
   z-index: -1;

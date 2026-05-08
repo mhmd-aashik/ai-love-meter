@@ -100,7 +100,7 @@ export default function LoveMeter() {
   };
 
   return (
-    <div className="h-full w-full flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-[100dvh] w-full flex flex-col items-center justify-center relative py-8 md:py-12 gap-8 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
         <div className="w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] animate-pulse" />
@@ -112,83 +112,85 @@ export default function LoveMeter() {
         </div>
       )}
 
-      <AnimatePresence custom={direction} mode="wait">
-        {step === "welcome" && (
-          <StepCard key="welcome" variants={variants} direction={direction}>
-            <WelcomeStep
-              onStart={() => nextStep("personA")}
-              recentResults={recentData?.getRecentResults}
-            />
-          </StepCard>
-        )}
+      <div className="w-full flex items-center justify-center relative z-10">
+        <AnimatePresence custom={direction} mode="wait">
+          {step === "welcome" && (
+            <StepCard key="welcome" variants={variants} direction={direction}>
+              <WelcomeStep
+                onStart={() => nextStep("personA")}
+                recentResults={recentData?.getRecentResults}
+              />
+            </StepCard>
+          )}
 
-        {step === "personA" && (
-          <StepCard key="personA" variants={variants} direction={direction}>
-            <PersonStep
-              step={1}
-              total={4}
-              title="Person A"
-              subtitle="Profile setup for the first user."
-              person={personA}
-              setPerson={setPersonA}
-              onNext={() => nextStep("personB")}
-              onPrev={() => prevStep("welcome")}
-            />
-          </StepCard>
-        )}
+          {step === "personA" && (
+            <StepCard key="personA" variants={variants} direction={direction}>
+              <PersonStep
+                step={1}
+                total={4}
+                title="Person A"
+                subtitle="Profile setup for the first user."
+                person={personA}
+                setPerson={setPersonA}
+                onNext={() => nextStep("personB")}
+                onPrev={() => prevStep("welcome")}
+              />
+            </StepCard>
+          )}
 
-        {step === "personB" && (
-          <StepCard key="personB" variants={variants} direction={direction}>
-            <PersonStep
-              step={2}
-              total={4}
-              title="Person B"
-              subtitle="Profile setup for the match."
-              person={personB}
-              setPerson={setPersonB}
-              onNext={() => nextStep("context")}
-              onPrev={() => prevStep("personA")}
-            />
-          </StepCard>
-        )}
+          {step === "personB" && (
+            <StepCard key="personB" variants={variants} direction={direction}>
+              <PersonStep
+                step={2}
+                total={4}
+                title="Person B"
+                subtitle="Profile setup for the match."
+                person={personB}
+                setPerson={setPersonB}
+                onNext={() => nextStep("context")}
+                onPrev={() => prevStep("personA")}
+              />
+            </StepCard>
+          )}
 
-        {step === "context" && (
-          <StepCard key="context" variants={variants} direction={direction}>
-            <ContextStep
-              step={3}
-              total={4}
-              relationshipType={relationshipType}
-              setRelationshipType={setRelationshipType}
-              extraContext={extraContext}
-              setExtraContext={setExtraContext}
-              isPending={mutation.isPending}
-              onSubmit={handleSubmit}
-              onPrev={() => prevStep("personB")}
-            />
-          </StepCard>
-        )}
+          {step === "context" && (
+            <StepCard key="context" variants={variants} direction={direction}>
+              <ContextStep
+                step={3}
+                total={4}
+                relationshipType={relationshipType}
+                setRelationshipType={setRelationshipType}
+                extraContext={extraContext}
+                setExtraContext={setExtraContext}
+                isPending={mutation.isPending}
+                onSubmit={handleSubmit}
+                onPrev={() => prevStep("personB")}
+              />
+            </StepCard>
+          )}
 
-        {step === "result" && mutation.data?.analyzeLove && (
-          <StepCard
-            key="result"
-            variants={variants}
-            direction={direction}
-            className="max-w-xl"
-          >
-            <ResultStep
-              results={mutation.data.analyzeLove}
-              onReset={handleReset}
-            />
-          </StepCard>
-        )}
-      </AnimatePresence>
+          {step === "result" && mutation.data?.analyzeLove && (
+            <StepCard
+              key="result"
+              variants={variants}
+              direction={direction}
+              className="max-w-xl"
+            >
+              <ResultStep
+                results={mutation.data.analyzeLove}
+                onReset={handleReset}
+              />
+            </StepCard>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Modern Indicators */}
-      <div className="absolute bottom-8 inset-x-0 flex justify-center gap-3">
+      {/* Modern Indicators - Now relative to content */}
+      <div className="flex justify-center gap-3 z-20">
         {["welcome", "personA", "personB", "context", "result"].map((s) => (
           <div
             key={s}
-            className={`h-0.5 transition-all rounded-full ${step === s ? "w-12 bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" : "w-4 bg-white/10"}`}
+            className={`h-1 transition-all rounded-full ${step === s ? "w-12 bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" : "w-4 bg-white/10"}`}
           />
         ))}
       </div>
